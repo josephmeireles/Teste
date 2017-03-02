@@ -106,15 +106,15 @@ Local _cCliente := ""
 Local cQuery    := ""
 Pergunte(cPerg,.F.)
 
-cQuery += " SELECT " + CRLF
-cQuery += "     ZZ1.ZZ1_COD AS EVENTO, " + CRLF
-cQuery += "     ZZ1.ZZ1_DESC AS NOMEVEN, " + CRLF
-cQuery += "     SA1.A1_COD AS CLIENTE, " + CRLF
-cQuery += "     SA1.A1_NOME AS NOMECLI, " + CRLF
-cQuery += "     SA1.A1_CGC AS CNPJ, " + CRLF
-cQuery += "     SE1.E1_EMISSAO AS EMISSAO, " + CRLF
-cQuery += "     SE1.E1_VALOR AS VALOR, " + CRLF
-cQuery += "     SE1.E1_VENCTO AS VENCTO " + CRLF
+cQuery := " SELECT " + CRLF
+cQuery += "     ZZ1.ZZ1_COD EVENTO, " + CRLF
+cQuery += "     ZZ1.ZZ1_DESC NOMEVEN, " + CRLF
+cQuery += "     SA1.A1_COD CLIENTE, " + CRLF
+cQuery += "     SA1.A1_NOME NOMECLI, " + CRLF
+cQuery += "     SA1.A1_CGC CNPJ, " + CRLF
+cQuery += "     SE1.E1_EMISSAO EMISSAO, " + CRLF
+cQuery += "     SE1.E1_VALOR VALOR, " + CRLF
+cQuery += "     SE1.E1_VENCTO VENCTO " + CRLF
 cQuery += " FROM " + RetSqlName("ZZ1") + " ZZ1, " + CRLF
 cQuery +=            RetSqlName("SA1") + " SA1, " + CRLF
 cQuery +=            RetSqlName("SC5") + " SC5, " + CRLF
@@ -124,7 +124,7 @@ cQuery += "   AND ZZ1.ZZ1_FILIAL = '" + xFilial ("ZZ1") + "' " + CRLF
 cQuery += "   AND SA1.A1_FILIAL = '" + xFilial ("SA1") + "' " + CRLF
 cQuery += "   AND SC5.C5_FILIAL = '" + xFilial ("SC5") + "' " + CRLF
 cQuery += "   AND SE1.E1_FILIAL = '" + xFilial ("SE1") + "' " + CRLF
-cQuery += "   AND ZZ1.ZZ1_COD = SC5.C5_EVENTO " + CRLF
+cQuery += "   AND ZZ1.ZZ1_COD = SC5.C5_XEVENTO " + CRLF
 cQuery += "   AND SC5.C5_NOTA = SE1.E1_NUM " + CRLF
 cQuery += "   AND SC5.C5_SERIE = SE1.E1_PREFIXO " + CRLF
 cQuery += "   AND SC5.C5_CLIENTE = SE1.E1_CLIENTE " + CRLF

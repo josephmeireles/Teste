@@ -37,6 +37,7 @@ user function CN120ENMED()
 	Local _nTotal     := CND->CND_VLTOT
 	Local _nSaldo     := 0
 	Local _cMailGst   := ""
+	Local _aVal       := {}
 
 	// Obter percentuais
 	_cAvPCSld := Iif( FieldPos("CN9_XPCAVS")==0,_cAvPCSld,CN9->CN9_XPCAVS) 

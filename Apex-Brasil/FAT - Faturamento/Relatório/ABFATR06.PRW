@@ -100,7 +100,7 @@ Local _cCliente := ""
 
 Pergunte(cPerg,.F.)
 
-cQuery += " SELECT " + CRLF
+cQuery := " SELECT " + CRLF
 cQuery += "     ZZ1.ZZ1_COD AS EVENTO, " + CRLF
 cQuery += "     ZZ1.ZZ1_DESC AS NOMEVEN, " + CRLF
 cQuery += "     SA1.A1_COD AS CLIENTE, " + CRLF
@@ -118,7 +118,7 @@ cQuery += "   AND ZZ1.ZZ1_FILIAL = '" + xFilial ("ZZ1") + "' " + CRLF
 cQuery += "   AND SA1.A1_FILIAL = '" + xFilial ("SA1") + "' " + CRLF
 cQuery += "   AND SC5.C5_FILIAL = '" + xFilial ("SC5") + "' " + CRLF
 cQuery += "   AND SE1.E1_FILIAL = '" + xFilial ("SE1") + "' " + CRLF
-cQuery += "   AND ZZ1.ZZ1_COD = SC5.C5_EVENTO " + CRLF
+cQuery += "   AND ZZ1.ZZ1_COD = SC5.C5_XEVENTO " + CRLF
 cQuery += "   AND SC5.C5_NOTA = SE1.E1_NUM " + CRLF
 cQuery += "   AND SC5.C5_SERIE = SE1.E1_PREFIXO " + CRLF
 cQuery += "   AND SC5.C5_CLIENTE = SE1.E1_CLIENTE " + CRLF
