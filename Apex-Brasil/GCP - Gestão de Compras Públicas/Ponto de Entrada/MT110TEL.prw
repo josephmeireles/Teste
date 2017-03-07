@@ -2,7 +2,7 @@
 #INCLUDE "PROTHEUS.CH"
 
 /*/{Protheus.doc} MT110TEL
-//TODO Descrição:  Rotina Adiconar novos campos personalizados 
+//TODO Descrição:  Rotina Adiconar novos campos personalizados
 na solicitacao de compras.
 @Project	SuperAcao Apex-Brasil.
 @Author 	Joseph Oliveira / Analista de Serviços TOTVS.
@@ -18,7 +18,7 @@ User function MT110TEL()
 	Local nReg       := PARAMIXB[4]
 	Local cItens	 := space(15)
 	Local oGet1
-	Local oGet2 
+	Local oGet2
 	Local oGet3
 	Local oGet4
 	Local oGet5
@@ -40,7 +40,6 @@ User function MT110TEL()
 	Local cProjFenix := SPACE( LEN( SC1->C1_CLVL ) )
 	Local cCodCenCus := SPACE( LEN( SC1->C1_CC ) )
 	Local cEvento	 := SPACE( LEN( SC1->C1_XEVENTO ) )
-	Local cVlrNego
 	
 	cAcao		:= SC1->C1_XDACAO
 	cCodAcao	:= SC1->C1_XACAO

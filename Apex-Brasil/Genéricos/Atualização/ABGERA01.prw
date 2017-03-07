@@ -142,11 +142,11 @@ STATIC FUNCTION ProcEnvEma(cRemete, cDestin, cAssunto, cCorpoEmai, aAnexos, cLog
 		cEnvCorpo	+= '<tr><td><span style="color:#002060">'
 		cEnvCorpo	+= cCorpoEmai
 		cEnvCorpo	+= '</span></td></tr>'
-				
+
 		IF !EMPTY(cLogoAssin) .AND. FILE(cLogoAssin)
 			cEnvCorpo	+= '<tr><td><img src="' + ALLTRIM(SUBSTR(cLogoAssin,RAT("\",cLogoAssin)+1,LEN(cLogoAssin))) + '"/></td></tr>'
 		ENDIF
-		
+
 		cEnvCorpo	+= '</table>'
 		cEnvCorpo	+= '</body>'
 		cEnvCorpo	+= '</html>'

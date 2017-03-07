@@ -47,8 +47,8 @@ user function CN120ENMED()
 	_nSaldo := CN9->CN9_SALDO
 
 	// Calcular o percentual
-	For _nIdx := 1 to Len(_aAvPCSld)
-		Aadd( _aVal, { Val(_aAvPCSld), (_nTotal * (Val(_aAvPCSld)/100)) } )
+/*	For _nIdx := 1 to Len(_aAvPCSld)
+		Aadd( _aVal, { Val(_aAvPCSld[_nIdx]), (_nTotal * (Val(_aAvPCSld)/100)) } )
 	Next _nIdx
 	
 	For _nIdx := 1 to Len(_aVal)
@@ -57,7 +57,7 @@ user function CN120ENMED()
 			Break
 		Endif
 	Next _nIdx
-
+*/
 	If _lAtingiu
 
 		//--- Tratamentos

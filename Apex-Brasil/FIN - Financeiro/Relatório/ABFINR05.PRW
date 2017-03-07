@@ -2,21 +2,15 @@
 #INCLUDE "Protheus.ch"
 #INCLUDE "Rwmake.ch"
 
-/*
-ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
-±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
-±±ÉÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍËÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍËÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍ»±±
-±±ºPrograma  ³ AFINR04 ºAutor  ³ TOTVS              º Data ³ 14/12/2016  º±±
-±±ÌÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÏÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÏÍÍÍÍÍÍÍÍÍÍÍÍÍ¹±±
-±±ºDesc.     ³ Impressão do Relatório de Ordem de Pagamentos              º±±
-±±º          ³ MIT FIN004                                                 º±±
-±±ÌÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹±±
-±±ºUso       ³ APEX                                                       º±±
-±±ÈÍÍÍÍÍÍÍÍÍÍÏÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼±±
-±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
-ßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßß
-*/
-User Function AFINR04()
+/*/{Protheus.doc} AFINR05
+//TODO Descrição auto-gerada.
+@author TOTVS
+@since 14/12/2016
+@version undefined
+
+@type function
+/*/
+User Function ABFINR05()
 
 Local oDlg    := NIL
 
@@ -24,9 +18,9 @@ Local oDlg    := NIL
 //³Desenha a tela de impressão³
 //ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-@ 096,042 TO 323,505 DIALOG oDlg TITLE "Relatório de Ordem de Pagamento"
+@ 096,042 TO 323,505 DIALOG oDlg TITLE "Extrato de remessa para o exterior"
 @ 008,010 TO 084,222
-@ 018,020 SAY "Relatório de Ordem de Pagamento"
+@ 018,020 SAY "Extrato de remessa para o exterior"
 @ 030,020 SAY "Será Gerada de Acordo com a Selecao de Parâmetros."
 ///@ 095,130 BUTTON "Gerar Ordem"     SIZE 45,10 ACTION Processa( {|| Imprime() }, "Processando..." )
 ///@ 095,73  BUTTON "Parâmetros"  SIZE 45,10 ACTION Processa( {|| ReportDef() }, "Processando..." )
@@ -37,39 +31,30 @@ ACTIVATE DIALOG oDlg CENTERED
 
 Return Nil
 
-/*
-ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ
-±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
-±±ÉÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍËÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍËÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍ»±±
-±±ºPrograma  ³ReportDef ºAutor  ³ TOTVS              º Data ³ 27/10/2016  º±±
-±±ÌÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÍÏÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÊÍÍÍÍÍÍÏÍÍÍÍÍÍÍÍÍÍÍÍÍ¹±±
-±±ºDesc.     ³ Definição da estrutura do relatório.                       º±±
-±±º          ³                                                            º±±
-±±ÌÍÍÍÍÍÍÍÍÍÍØÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹±±
-±±ºUso       ³ APEX                                                       º±±
-±±ÈÍÍÍÍÍÍÍÍÍÍÏÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼±±
-±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
-ßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßß
-*/
+
+//{Protheus.doc} ReportDef
+//Descrição auto-gerada.
+//@author TOTVS
+//@since 27/10/2016
+//@version undefined
+
+//@type function
+
 Static Function ReportDef()
 
 Local aArea		   := GetArea()
 Local aAreaA2	   := SA2->(GetArea())
 Local aAreaE2	   := SE2->(GetArea())
 Local aAreaA6	   := SA6->(GetArea())
-Local aAreaF1	   := SA6->(GetArea())
-Local aAreaD1	   := SA6->(GetArea())
+Local aAreaF1	   := SF1->(GetArea())
+Local aAreaD1	   := SD1->(GetArea())
 Local cQuery       := ""
 Local _dData	   := AllTrim(Str(Day(dDataBase),2))+' de '+ AllTrim(MesExtenso(dDataBase))+' de '+AllTrim(Str(Year(dDataBase), 4))
 Local _cNomeUser   := UsrFullName(__cUserID)
 Local _cEvento     := ""
-Local _cCliente    := ""
 Local _dDTEmissao  := ""
 Local _dEmissao    := ""
 Local _dVencto     := ""
-Local _cBanco	   := MV_PAR05
-Local _cAgencia    := MV_PAR06
-Local _cConta      := MV_PAR07 
 Local _cNomeBco    := ""
 Local _cPrefixox   := ""
 Local _cTitulo	   := ""
@@ -79,18 +64,24 @@ Local _dVencReal   := ""
 Local _cLoja	   := ""
 Local _nValor	   := 0   
 Local _nValIOF     := 0
-Local _nValIR      := 0   
-Local _nAlIOF      := MV_PAR06  
-Local _nAlIR       := MV_PAR07 
-Local _nAlipd      := MV_PAR08
-Local _nTxFixa     := MV_PAR09 
-Local _cRevisado   := MV_PAR10
-Local _cGerente    := MV_PAR11
+Local _nValIR      := 0  
+Local _cFornec     := MV_PAR01
+Local _dData1      := dTos(MV_PAR02)
+Local _dData2      := dTos(MV_PAR03) 
+Local _cBanco	   := MV_PAR04
+Local _cAgencia    := MV_PAR05 
+Local _cConta      := MV_PAR06 
+Local _nAlIOF      := MV_PAR07  
+Local _nAlIR       := MV_PAR08 
+Local _nAlipd      := MV_PAR09
+Local _nTxFixa     := MV_PAR10 
+Local _cRevisado   := MV_PAR11
+Local _cGerente    := MV_PAR12
 
-Private cPerg      := PadR ("AFINR04", Len (SX1->X1_GRUPO))
+Private cPerg      := PadR ("AFINR05", Len (SX1->X1_GRUPO))
 
 Private hWord
-Private cPathDot 		:= "\\10.10.1.200\totvs$\Microsiga\Protheus_Data\Dot\Ordempg.dot" /* C:\APEX\cobranca.dot */
+Private cPathDot 		:= "\\10.10.1.200\totvs$\Microsiga\Protheus_Data\Dot\CartCob.dot" /* C:\APEX\cobranca.dot */
 
 // Pergunta na Tela, para Seleção de Parâmetros.
 AjustaSX1(cPerg)
@@ -101,29 +92,27 @@ Pergunte(cPerg, .T. )
 //³Posiciona as tabelas                                 ³
 //ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-cQuery += " SELECT " + CRLF
-cQuery += "     SA1.A1_COD AS CLIENTE, " + CRLF
-cQuery += "     SA1.A1_NOME AS NOMECLI, " + CRLF
-cQuery += "     SE2.E2_NUM AS NUMERO, " + CRLF
-cQuery += "     SE2.E2_EMISSAO AS EMISSAO, " + CRLF
-cQuery += "     SE2.E2_VALOR AS VALOR, " + CRLF
-cQuery += "     SE2.E2_VENCTO AS VENCTO, " + CRLF
-cQuery += "     SD1.D1_COD AS PRODUTO, " + CRLF
-cQuery += "     SD1.D1_ITEM AS ITEM " + CRLF  
-cQuery += "     SC5.C5_XEVENTO AS EVENTO " + CRLF
-cQuery += "     SC5.C5_XVNMES AS VNMES " + CRLF
-
-cQuery += " FROM " + RetSqlName("SA1") + " SA1, " + CRLF
-cQuery +=            RetSqlName("SE2") + " SE2, " + CRLF
-cQuery +=            RetSqlName("SC5") + " SC5, " + CRLF
-cQuery +=            RetSqlName("SD1") + " SD1, " + CRLF 
-cQuery +=            RetSqlName("SF1") + " SF1 " + CRLF
-
-cQuery += " WHERE SE2.E2_FORNECE BETWEEN '" + MV_PAR01 + "' AND '" + MV_PAR02 + "' " + CRLF
-cQuery += "   AND SE2.E2_EMISSAO BETWEEN '" + Dtos(mv_par03) + "' AND '" + Dtos(mv_par04) + "' " + CRLF
-cQuery += "   AND SA1.A1_FILIAL = '" + xFilial ("SA1") + "' " + CRLF
+cQuery := " SELECT " + CRLF
+cQuery += "     SA2.A2_COD FORNECE, " + CRLF
+cQuery += "     SA2.A2_NOME NOMEFOR, " + CRLF
+cQuery += "     SE2.E2_NUM NUMERO, " + CRLF
+cQuery += "     SE2.E2_EMISSAO EMISSAO, " + CRLF
+cQuery += "     SE2.E2_VALOR VALOR, " + CRLF
+cQuery += "     SE2.E2_VENCTO VENCTO, " + CRLF
+cQuery += "     SD1.D1_COD PRODUTO, " + CRLF
+cQuery += "     SD1.D1_ITEM ITEM " + CRLF  
+cQuery += "     SC1.C1_XEVENTO EVENTO " + CRLF
+cQuery += "     SC1.C1_XVNMES VNMES " + CRLF
+cQuery += "  FROM " + RetSqlName("SA2") + " SA2, " + CRLF
+cQuery +=             RetSqlName("SE2") + " SE2, " + CRLF
+cQuery +=             RetSqlName("SC1") + " SC1, " + CRLF
+cQuery +=             RetSqlName("SD1") + " SD1, " + CRLF 
+cQuery +=             RetSqlName("SF1") + " SF1  " + CRLF
+cQuery += "  WHERE SE2.E2_FORNECE = '" +_cFornec+ "' "+ CRLF
+cQuery += "   AND SE2.E2_EMISSAO BETWEEN '" + _dData1 + "' AND '" + _dData2 + "' " + CRLF
+cQuery += "   AND SA2.A2_FILIAL = '" + xFilial ("SA2") + "' " + CRLF
 cQuery += "   AND SE2.E2_FILIAL = '" + xFilial ("SE2") + "' " + CRLF
-cQuery += "   AND SC5.C5_FILIAL = '" + xFilial ("SC5") + "' " + CRLF
+cQuery += "   AND SC1.C1_FILIAL = '" + xFilial ("SC1") + "' " + CRLF
 cQuery += "   AND SD1.D1_FILIAL = '" + xFilial ("SD1") + "' " + CRLF
 cQuery += "   AND SF1.F1_FILIAL = '" + xFilial ("SF1") + "' " + CRLF
 
@@ -131,7 +120,7 @@ cQuery += "   AND SE2.E2_FORNECE = SF1.F1_FORNECE " + CRLF
 cQuery += "   AND SF1.F1_DOC = SD1.D1_DOC " + CRLF
 cQuery += "   AND SE2.E2_NUM = SF1.F1_DOC " + CRLF
 
-cQuery += "   AND SA1.D_E_L_E_T_ = ' ' " + CRLF
+cQuery += "   AND SA2.D_E_L_E_T_ = ' ' " + CRLF
 cQuery += "   AND SE2.D_E_L_E_T_ = ' ' " + CRLF
 cQuery += "   AND SD1.D_E_L_E_T_ = ' ' " + CRLF
 cQuery += "   AND SF1.D_E_L_E_T_ = ' ' " + CRLF
@@ -145,12 +134,11 @@ If Select("QRY") > 0
 EndIf
 
 TcQuery cQuery New Alias "QRY"
-
 dbSelectArea("SA6")
 dbSetOrder(1)
 
 If dbSeek(xfilial("SA6")+_cBanco+_cAgencia+_cConta)
-   _cNomeBco := A6_NOME
+   _cNomeBco := SA6->A6_NOME
 EndIf
 
 dbSelectArea("QRY")
@@ -162,13 +150,13 @@ QRY->(dbGoTop())
 //ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
 If !File(cPathDot)
-	MsgBox ("Arquivo Ordempg.dot nao encontrado.","ERRO","STOP")
+	MsgBox ("Arquivo CartCob.dot não encontrado.","ERRO","STOP")
 	Return(.F.)
 Endif
 
 //ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
-//³Montagem das variaveis dos itens. No documento word estas variaveis serao criadas ³
-//³dinamicamente da seguinte forma:                                                  ³
+//³Montagem das variaveis dos itens. No documento word estas variaveis serao criadas  ³
+//³dinamicamente da seguinte forma:                                                   ³
 //ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
 hWord    := OLE_CreateLink()
@@ -184,8 +172,8 @@ While !eof()
 	OLE_SetDocumentVar(hWord, "wor_cNomeUser" 	, _cNomeUser) 
 	OLE_SetDocumentVar(hWord, "wor_cRevisado" 	, _cRevisado)
 	OLE_SetDocumentVar(hWord, "wor_cGerente"   	, _cGerente)
-	OLE_SetDocumentVar(hWord, "wor_cCod"     	, QRY->CLIENTE)
-	OLE_SetDocumentVar(hWord, "wor_cNome"   	, QRY->NOMECLI)
+	OLE_SetDocumentVar(hWord, "wor_cCod"     	, QRY->FORNECE)
+	OLE_SetDocumentVar(hWord, "wor_cNome"   	, QRY->NOMEFOR)
 	OLE_SetDocumentVar(hWord, "wor_nVlror"  	, alltrim(transform(QRY->VNMES, "@E 9,999,999,999,999.99")))
 	OLE_SetDocumentVar(hWord, "wor_nVlrea"      , alltrim(transform(QRY->VALOR, "@E 9,999,999,999,999.99"))) 
 	OLE_SetDocumentVar(hWord, "wor_nAlIOF"      , alltrim(transform(_nAlIOF   , "@E 9,999.99"))) 
@@ -257,17 +245,18 @@ Local nX
 Local aRegs	   := {}
 Local cOrdem    
 
-Aadd(aRegs,{"Cliente?        "   ,"Cliente?        ","Cliente?        ","mv_ch1","C",TamSx3 ("A1_COD")[1]    ,0,0,"G","","MV_PAR01","","","","","","","","","SA1",""})
+Aadd(aRegs,{"Fornecedor?     "   ,"Fornecedor?     ","Fornecedor?     ","mv_ch1","C",TamSx3 ("A2_COD")[1]    ,0,0,"G","","MV_PAR01","","","","","","","","","SA2",""})
 Aadd(aRegs,{"Vencimento de?  "   ,"Vencimento de?  ","Vencimento de?  ","mv_ch2","D",TamSx3 ("E2_VENCTO")[1] ,0,0,"G","","MV_PAR02","","","","","","","","","","",""})
 Aadd(aRegs,{"Vencimento até? "   ,"Vencimento até? ","Vencimento até? ","mv_ch3","D",TamSx3 ("E2_VENCTO")[1] ,0,0,"G","","MV_PAR03","","","","","","","","","","",""})
-AADD(aRegs,{"Banco ?         "   ,"Banco ?         ","Banco ?         ","mv_ch4","C",TamSX3 ("A6_COD")[1]    ,0,0,"G","","MV_PAR04","","","","","","","","","","",""})
-AADD(aRegs,{"Agência ?       "   ,"Agência ?       ","Agência ?       ","mv_ch5","C",TamSX3 ("A6_AGENCIA")[1],0,0,"G","","MV_PAR05","","","","","","","","","SA6",""})
-AADD(aRegs,{"Aliquota de IOF:"   ,"Aliquota de IOF?","Aliquota de IOF?","mv_ch6","N",5                       ,2,0,"G","","mv_par06","","","","","","","","","","",""})
-AADD(aRegs,{"Aliquota de IR: "   ,"Aliquota de IR? ","Aliquota de IR? ","mv_ch7","N",5                       ,2,0,"G","","mv_par07","","","","","","","","","","",""})
-AADD(aRegs,{"Aliq.por dentro:"   ,"Aliq.por dentro:","Aliq.por dentro:","mv_ch8","N",5                       ,2,0,"G","","mv_par08","","","","","","","","","","",""})
-AADD(aRegs,{"Taxa fixa?      "   ,"Taxa fixa?      ","Taxa fixa?      ","mv_ch9","N",5                       ,2,0,"G","","mv_par09","","","","","","","","","","",""})
-AADD(aRegs,{"Revisado por:   "   ,"Revisado por:   ","Revisado por:   ","mv_cha","C",40                      ,0,0,"G","","MV_PAR10","","","","","","","","","","",""})
-AADD(aRegs,{"Gerente:        "   ,"Gerente:        ","Gerente:        ","mv_chb","C",40                      ,0,0,"G","","MV_PAR11","","","","","","","","","","",""})
+AADD(aRegs,{"Banco ?         "   ,"Banco ?         ","Banco ?         ","mv_ch4","C",TamSX3 ("A6_COD")[1]    ,0,0,"G","","MV_PAR04","","","","","","","","","SA6","",""})
+AADD(aRegs,{"Agência ?       "   ,"Agência ?       ","Agência ?       ","mv_ch5","C",TamSX3 ("A6_AGENCIA")[1],0,0,"G","","MV_PAR05","","","","","","","","","",""})
+AADD(aRegs,{"Conta ?         "   ,"Conta ?         ","Conta ?         ","mv_ch6","C",TamSX3 ("A6_CONTA")[1]  ,0,0,"G","","MV_PAR06","","","","","","","","","",""})
+AADD(aRegs,{"Aliquota de IOF:"   ,"Aliquota de IOF?","Aliquota de IOF?","mv_ch7","N",5                       ,2,0,"G","","mv_par07","","","","","","","","","","",""})
+AADD(aRegs,{"Aliquota de IR: "   ,"Aliquota de IR? ","Aliquota de IR? ","mv_ch8","N",5                       ,2,0,"G","","mv_par08","","","","","","","","","","",""})
+AADD(aRegs,{"Aliq.por dentro:"   ,"Aliq.por dentro:","Aliq.por dentro:","mv_ch9","N",5                       ,2,0,"G","","mv_par09","","","","","","","","","","",""})
+AADD(aRegs,{"Taxa fixa?      "   ,"Taxa fixa?      ","Taxa fixa?      ","mv_cha","N",5                       ,2,0,"G","","mv_par10","","","","","","","","","","",""})
+AADD(aRegs,{"Revisado por:   "   ,"Revisado por:   ","Revisado por:   ","mv_chb","C",40                      ,0,0,"G","","MV_PAR11","","","","","","","","","","",""})
+AADD(aRegs,{"Gerente:        "   ,"Gerente:        ","Gerente:        ","mv_chc","C",40                      ,0,0,"G","","MV_PAR12","","","","","","","","","","",""})
 
 dbSelectArea("SX1")
 dbSetOrder(1)
